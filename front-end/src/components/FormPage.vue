@@ -1,6 +1,6 @@
 <template>
   <div id="FormPage">
-    <form action="/submit" method="post" enctype="multipart/form-data">
+    <b-form action="/submit" method="post" enctype="multipart/form-data">
       <div v-show="step === 1">
         <h1>Patient Registration</h1>
         <legend>Patient Name</legend>
@@ -8,7 +8,7 @@
         <legend>Last Name</legend>
         <input id="lastName" type="text" name="name" v-model="form.lname">
         <div style="float:right;">
-          <button class="button" @click.prevent="next(2)">Next</button>
+          <button class="navigate" @click.prevent="next(2)">Next</button>
         </div>
       </div>
 
@@ -93,7 +93,7 @@
           <br>
         </div>
 
-        <button @click.prevent="prev()">Previous</button>
+        <button @click.prevent="prev(5)">Previous</button>
       </div>
 
       <div v-show="step === 8">
@@ -109,7 +109,7 @@
         <button @click.prevent="prev(7)">Previous</button>
         <button @click.prevent="submit()">Proceed</button>
       </div>
-    </form>
+    </b-form>
 
     <br>
     <br>
