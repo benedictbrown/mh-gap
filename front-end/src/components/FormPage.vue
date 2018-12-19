@@ -93,7 +93,7 @@
           <br>
         </div>
 
-        <button @click.prevent="prev()">Previous</button>
+        <button @click.prevent="prev(5)">Previous</button>
       </div>
 
       <div v-show="step === 8">
