@@ -1,5 +1,8 @@
 // import PDFDocument from "pdfkit";
 const api = "http://localhost:3001";
+var FormData = require("form-data");
+
+var formData = new FormData();
 
 export default {
   name: "FormPage",
@@ -38,13 +41,17 @@ export default {
       this.step = newStep;
     },
     submit() {
+      alert("Submitting...");
       fetch(`${api}/submit`, {
         method: "POST",
         headers: {
-          Accept: "application/json",
-          "Content-Type": "multipart/form-data"
-        }
-      });
+          Accept: "application/json"
+        },
+        body: formData
+      })
+        .then(res => res.json())
+        .catch(error => console.error("Error:", error))
+        .then(res => console.log("Success:", JSON.stringify(res)));
     }
   }
 };
