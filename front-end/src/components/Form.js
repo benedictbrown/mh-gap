@@ -45,7 +45,8 @@ export default {
       fetch(`${api}/submit`, {
         method: "POST",
         headers: {
-          Accept: "application/json"
+          Accept: "application/json",
+          "Content-Type": "multipart/form-data"
         },
         body: formData
       })
