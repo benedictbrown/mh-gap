@@ -1,19 +1,36 @@
 <template>
   <div id="FormPage">
-    <form action="/submit" method="post" enctype="multipart/form-data">
-      <div v-show="step === 1">
+    <b-form action="/submit" enctype="multipart/form-data">
+      <b-form-group id="registration" v-show="step === 1">
         <h1>Patient Registration</h1>
         <legend>Patient Name</legend>
-        <input id="firstName" type="text" name="name" v-model="form.fname">
-        <legend>Last Name</legend>
-        <input id="lastName" type="text" name="name" v-model="form.lname">
-        <div style="float:right;">
-          <button class="button" @click.prevent="next(2)">Next</button>
-        </div>
-      </div>
+        <b-form-input id="fname" 
+                      type="text" 
+                      required
+                      name="fname" 
+                      v-model="form.fname"
+                      label="First Name"
+                      placeholder="Enter First Name">
+        </b-form-input>
+        <b-form-input id="lname" 
+                      type="text"
+                      required 
+                      name="lname" 
+                      v-model="form.lname"
+                      label="Last Name"
+                      placeholder="Last Name">
 
+        </b-form-input>
+        <div style="float:right;">
+          <button class="navigate" @click.prevent="next(2)">Next</button>
+        </div>
+      </b-form-group>
+      <div v-show="step !==1">
+        <h1 text-align:center>Patient Diagnosis</h1>
+        <br>
+      </div>
       <div v-show="step === 2">
-        <h1>Are there any other explanations for the symptoms?</h1>
+        <h2>Are there any other explanations for the symptoms?</h2>
         <div>
           <p>
             Assess signs and symptoms of delirium due to an acute physical condition, e.g. infection, celebral malaria, dehydration, metabolic abnormalities (such as hypoglycaemia or hyponatraemia); or medication side effects, e.g. due to some antimalarial
@@ -21,6 +38,7 @@
           </p>
           <div>
             <button @click.prevent="next(3)">Yes</button>
+            <br>
             <br>
             <button @click.prevent="next(4)">No</button>
             <br>
@@ -45,7 +63,7 @@
       </div>
 
       <div v-show="step === 5">
-        <h1>Is the person having an acute manic episode?</h1>
+        <h2>Is the person having an acute manic episode?</h2>
         <div>Have several of the following symptoms occurred simultaneously, lasting for at least 1 week, and severely enough to interfere significantly with work and social activities or requiring confinement or hospitalization:
           <br>
           <ul>
@@ -77,7 +95,7 @@
       </div>
 
       <div v-show="step === 7">
-        <h1>Does the person have psychosis?</h1>
+        <h2>Does the person have psychosis?</h2>
         <div>Does the person have at least two of the following:
           <br>
           <ul>
@@ -109,9 +127,7 @@
         <button @click.prevent="prev(7)">Previous</button>
         <button @click.prevent="submit()">Proceed</button>
       </div>
-    </form>
-
-    <br>
+    </b-form>
     <br>
   </div>
 </template>
@@ -120,6 +136,10 @@
 </script>
 
 <style>
+h1 {
+  text-align: center;  
+}
+
 input {
   width: 80%;
   font-size: 17px;
