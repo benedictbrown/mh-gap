@@ -1,49 +1,69 @@
-require("dotenv").config();
+// import PDFDocument from "pdfkit";
+const api = "http://localhost:3001";
+var FormData = require("form-data");
 
-const express = require("express");
-// const multer = require('multer');
-const config = require("./config");
-// const upload = multer({ dest: 'uploads/' });
-const bodyParser = require("body-parser");
-const cors = require('cors')
-const formidable = require("formidable");
-
-const app = express();
-// //MULTER CONFIG: to get files to temp server storage
-// const multerConfig = {
-//   storage: multer.diskStorage({
-//     //Then give the file a unique name
-//     filename: function(req, file, next) {
-//       console.log(file);
-//       const ext = file.mimetype.split("/")[1];
-//       next(null, file.fieldname + "-" + Date.now() + "." + ext);
-//     }
-//   })
-// };
-app.use(bodyParser.urlencoded({
-  extended: false
-})); //handle body requests
-app.use(bodyParser.json());
-app.use(express.static("public"));
-app.use(cors())
-
-app.post("/submit", (req, res) => {
-  console.log("Received POST request")
-  var form = new formidable.IncomingForm();
-
-  form.parse(req);
-
-  form.on("fileBegin", function (name, file) {
-    file.path = __dirname + "/uploads/" + file.name;
-  });
-
-  form.on("file", function (name, file) {
-    console.log("Uploaded" + file.name);
-  });
-
-  res.send("/");
-});
-
-app.listen(config.port, () => {
-  console.log("Server listening on port %s, Ctrl+C to stop", config.port);
-});
+export default {
+  name: "FormPage",
+  data() {
+    return {
+      step: 1,
+      form: {
+        fname: "",
+        lname: "",
+        report: [{
+            text2: "There are explanations for symptoms",
+            value2: "No"
+          },
+          {
+            text3: "Access and manage acute physical condition",
+            value3: "No"
+          },
+          {
+            text4: "DEMENTIA, DEPRESSION, DRUG/ALCOHOL INTOXICATION OR WITHDRAWAL suspected",
+            value4: "No"
+          },
+          {
+            text5: "Acute Manic Episode",
+            value5: "No"
+          },
+          {
+            text6: "BIPLAR DISORDER manic episode",
+            value6: "No"
+          },
+          {
+            text7: "Does the person have psychosis?",
+            value7: "No"
+          },
+          {
+            text8: "Consultation with specialist to review other possible causes",
+            value8: "No"
+          },
+          {
+            text9: "Pyschosis is likely",
+            value9: "No"
+          }
+        ]
+      }
+    };
+  },
+  methods: {
+    prev(step) {
+      this.step = step;
+    },
+    next(newStep) {
+      this.step = newStep;
+    },
+    submit() {
+      var formData = new FormData("FormPage");
+      fetch(`${api}/submit`, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+          },
+          body: formData
+        })
+        .then(res => res.json())
+        .then(console.log("Submitted!"));
+    }
+  }
+};
