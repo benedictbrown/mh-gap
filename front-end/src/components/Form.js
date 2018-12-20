@@ -60,13 +60,10 @@ export default {
           method: "POST",
           headers: {
             Accept: "application/json",
-            "Content-Type": "multipart/form-data"
           },
           body: formData
         })
-        .then(res => res.json())
-        .catch(error => console.error("Error:", error))
-        .then(res => console.log("Success:", JSON.stringify(res)))
+        .then(res => res.text())
         .then(console.log("Submitted!"));
     }
   }
