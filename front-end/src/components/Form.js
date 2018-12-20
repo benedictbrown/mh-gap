@@ -2,8 +2,6 @@
 const api = "http://localhost:3001";
 var FormData = require("form-data");
 
-var formData = new FormData();
-
 export default {
   name: "FormPage",
   data() {
@@ -56,6 +54,7 @@ export default {
       this.step = newStep;
     },
     submit() {
+      var formData = new FormData("FormPage");
       fetch(`${api}/submit`, {
           method: "POST",
           headers: {
@@ -63,7 +62,7 @@ export default {
           },
           body: formData
         })
-        .then(res => res.text())
+        .then(res => res.json())
         .then(console.log("Submitted!"));
     }
   }
