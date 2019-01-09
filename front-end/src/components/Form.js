@@ -53,7 +53,8 @@ export default {
     next(newStep) {
       this.step = newStep;
     },
-    submit() {
+    submit() { <<
+      << << < HEAD
       var formData = new FormData("FormPage");
       fetch(`${api}/submit`, {
           method: "POST",
@@ -63,7 +64,21 @@ export default {
           body: formData
         })
         .then(res => res.json())
-        .then(console.log("Submitted!"));
+        .then(console.log("Submitted!")); ===
+      === =
+      var formData = new FormData();
+      fetch(`${api}/submit`, {
+          method: 'POST',
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "multipart/form-data"
+          },
+          body: formData
+        })
+        .then(res => res.json())
+        .catch(error => console.error('Error:', error))
+        .then(res => console.log('Success:', JSON.stringify(res))) >>>
+        >>> > 7 a39552fb0ccbafeeb9023104c463f8d1f918a52
     }
   }
 };

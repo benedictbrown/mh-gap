@@ -84,8 +84,31 @@
         <br>
       </div>
 
+<<<<<<< HEAD
       <button @click.prevent="prev(4)">Previous</button>
     </div>
+=======
+      <div v-show="step === 5">
+        <h2>Is the person having an acute manic episode?</h2>
+        <div>Have several of the following symptoms occurred simultaneously, lasting for at least 1 week, and severely enough to interfere significantly with work and social activities or requiring confinement or hospitalization:
+          <br>
+          <ul>
+            <li>Elevated or irritable mood</li>
+            <li>Decreased need for sleep</li>
+            <li>Increased activity, feeling of increased energy, increased talkativeness or rapid speech</li>
+            <li>Loss of normal social inhibitions such as sexual indiscretion</li>
+            <li>Impulsive or reckless behaviours such as excessive spending, making imp</li>
+            <li>Being easily distracted</li>
+            <li>Unrealistically inflated self-esteem</li>
+          </ul>
+        </div>
+        <div>
+          <button @click.prevent="next(6)">Yes</button>
+          <br>
+          <button @click.prevent="next(7)">No</button>
+          <br>
+        </div>
+>>>>>>> 7a39552fb0ccbafeeb9023104c463f8d1f918a52
 
     <div v-show="step === 6">
       <p>BIPOLAR DISORDER manic episode is likely</p>
@@ -108,16 +131,39 @@
           </li>
         </ul>
       </div>
+<<<<<<< HEAD
       <div>
         <button @click.prevent="next(9)">Yes</button>
         <br>
         <button @click.prevent="next(8)">No</button>
         <br>
+=======
+
+      <div v-show="step === 7">
+        <h2>Does the person have psychosis?</h2>
+        <div>Does the person have at least two of the following:
+          <br>
+          <ul>
+            <li>Delusions, fixed false beliefs not shared by others in the person’s culture</li>
+            <li>Hallucinations, hearing voices or seeing things that are not there</li>
+            <li>Disorganized speech and/or behaviour, e.g. incoherent/irrelevant speech such as mumbling or laughing to self, strange appearance, signs of self-neglect or appearing unkempt</li>
+          </ul>
+        </div>
+        <div>
+          <button @click.prevent="next(9)">Yes</button>
+          <br>
+          <button @click.prevent="next(8)">No</button>
+          <br>
+        </div>
+
+        <button @click.prevent="prev(5)">Previous</button>
+>>>>>>> 7a39552fb0ccbafeeb9023104c463f8d1f918a52
       </div>
 
       <button @click.prevent="prev(5)">Previous</button>
     </div>
 
+<<<<<<< HEAD
     <div v-show="step === 8">
       <p>Consider consultation with specialist to review other possible causes of psychoses.</p>
       <p>Go to Protocol 2 (Psychosis)</p>
@@ -133,6 +179,17 @@
     </div>
     <br>
   </b-form>
+=======
+      <div v-show="step === 9">
+        <p>PSYCHOSIS is likely</p>
+        <p>Go to Protocol 2 (Psychosis)</p>
+        <button @click.prevent="prev(7)">Previous</button>
+        <button @click.prevent="submit()">Proceed</button>
+      </div>
+    </b-form>
+    <br>
+  </div>
+>>>>>>> 7a39552fb0ccbafeeb9023104c463f8d1f918a52
 </template>
 
 <script src="./Form.js">
@@ -140,7 +197,11 @@
 
 <style>
 h1 {
+<<<<<<< HEAD
   text-align: center;
+=======
+  text-align: center;  
+>>>>>>> 7a39552fb0ccbafeeb9023104c463f8d1f918a52
 }
 
 input {
