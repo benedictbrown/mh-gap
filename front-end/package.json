@@ -17,7 +17,8 @@
     "multer": "^1.4.1",
     "pdfkit": "^0.8.3",
     "popper.js": "^1.14.6",
-    "vue": "^2.5.17"
+    "vue": "^2.5.17",
+    "vue-router": "^3.0.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.2.0",
