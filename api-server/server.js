@@ -19,20 +19,22 @@ const app = express();
 //     }
 //   })
 // };
-app.use(bodyParser.urlencoded({ extended: false })); //handle body requests
+app.use(bodyParser.urlencoded({
+  extended: false
+})); //handle body requests
 app.use(bodyParser.json());
 app.use("/", express.static("public"));
 
-app.post("/submit", function(req, res) {
+app.post("/submit", function (req, res) {
   var form = new formidable.IncomingForm();
 
   form.parse(req);
 
-  form.on("fileBegin", function(name, file) {
+  form.on("fileBegin", function (name, file) {
     file.path = __dirname + "/uploads/" + file.name;
   });
 
-  form.on("file", function(name, file) {
+  form.on("file", function (name, file) {
     console.log("Uploaded" + file.name);
   });
 
