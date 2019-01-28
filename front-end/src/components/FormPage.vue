@@ -1,18 +1,34 @@
 <template>
   <div id="FormPage">
     <b-form action="/submit" enctype="multipart/form-data">
-      <b-form-group id="registration" v-show="step === 1">
+      <div id="registration" v-show="step === 1">
         <h1>Patient Registration</h1>
-        <legend>Patient Name</legend>
-        <b-form-input id="fname" type="text" required name="fname" v-model="form.fname" label="First Name" placeholder="Enter First Name">
-        </b-form-input>
-        <b-form-input id="lname" type="text" required name="lname" v-model="form.lname" label="Last Name" placeholder="Last Name">
-  
-        </b-form-input>
+        <h2>Patient Name</h2>
+        <div>
+          <input
+            id="fname"
+            type="text"
+            name="fname"
+            v-model="form.fname"
+            label="First Name"
+            placeholder="Enter First Name"
+          >
+        </div>
+        <br>
+        <div>
+          <input
+            id="lname"
+            type="text"
+            name="lname"
+            v-model="form.lname"
+            label="Last Name"
+            placeholder="Last Name"
+          >
+        </div>
         <div style="float:right;">
           <button class="navigate" @click.prevent="next(2)">Next</button>
         </div>
-      </b-form-group>
+      </div>
       <div v-show="step !==1">
         <h1 text-align:center>Patient Diagnosis</h1>
         <br>
@@ -33,23 +49,23 @@
           </div>
         </div>
         <br>
-        <button align="right" @click.prevent="prev(1)">Previous</button>
+        <button style="float:right;" @click.prevent="prev(1)">Previous</button>
       </div>
-  
+
       <div v-show="step === 3">
         <p>Assess and manage the acute physical condition, and refer to emergency services/specialist as needed.</p>
         <button @click.prevent="prev(2)">Previous</button>
         <br>
         <button align="right" @click.prevent="submit()">Proceed</button>
       </div>
-  
+
       <div v-show="step === 4">
         <p>Is DEMENTIA, DEPRESSION, DRUG/ALCOHOL INTOXICATION OR WITHDRAWAL suspected?</p>
         <p>If that is the case, please consult a Mental Health Specialist</p>
         <button @click.prevent="prev(2)">Previous</button>
         <button @click.prevent="next(5)">Proceed</button>
       </div>
-  
+
       <div v-show="step === 5">
         <h2>Is the person having an acute manic episode?</h2>
         <div>Have several of the following symptoms occurred simultaneously, lasting for at least 1 week, and severely enough to interfere significantly with work and social activities or requiring confinement or hospitalization:
@@ -70,10 +86,10 @@
           <button @click.prevent="next(7)">No</button>
           <br>
         </div>
-  
+
         <button @click.prevent="prev(4)">Previous</button>
       </div>
-  
+
       <div v-show="step === 6">
         <p>BIPOLAR DISORDER manic episode is likely</p>
         <p>Go to Protocol 1 (Manic episode in Bipolar disorder</p>
@@ -81,7 +97,7 @@
         <button @click.prevent="prev(5)">Previous</button>
         <button @click.prevent="submit()">Proceed</button>
       </div>
-  
+
       <div v-show="step === 7">
         <h2>Does the person have psychosis?</h2>
         <div>Does the person have at least two of the following:
@@ -98,17 +114,17 @@
           <button @click.prevent="next(8)">No</button>
           <br>
         </div>
-  
+
         <button @click.prevent="prev(5)">Previous</button>
       </div>
-  
+
       <div v-show="step === 8">
         <p>Consider consultation with specialist to review other possible causes of psychoses.</p>
         <p>Go to Protocol 2 (Psychosis)</p>
         <button @click.prevent="prev(7)">Previous</button>
         <button @click.prevent="submit()">Proceed</button>
       </div>
-  
+
       <div v-show="step === 9">
         <p>PSYCHOSIS is likely</p>
         <p>Go to Protocol 2 (Psychosis)</p>
@@ -121,28 +137,28 @@
 </template>
 
 <script src="./Form.js">
-  
 </script>
 
 <style>
-  h1 {
-    text-align: center;
-  }
-  
-  input {
-    width: 80%;
-    font-size: 17px;
-    font-family: "Avenir", Helvetica, Arial, sans-serif;
-    border: 1px solid #aaaaaa;
-  }
-  
-  button {
-    background-color: #ffdddd;
-    color: #1f1c1c;
-    border: 1px;
-    padding: 8px 16px;
-    font-size: 17px;
-    font-family: "Avenir", Helvetica, Arial, sans-serif;
-    cursor: pointer;
-  }
+h1 {
+  text-align: center;
+}
+
+input {
+  width: 80%;
+  padding: 1.5% 4%;
+  font-size: 17px;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  border: 1px solid #aaaaaa;
+}
+
+button {
+  background-color: #ffdddd;
+  color: #1f1c1c;
+  border: 1px;
+  padding: 8px 16px;
+  font-size: 17px;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  cursor: pointer;
+}
 </style>
