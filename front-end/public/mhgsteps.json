@@ -1,0 +1,213 @@
+{
+    "step1": {
+        "tips": [
+        ],
+        "nextTrue": "step2"
+    },
+    "step2": {
+        "questions": [
+            "Are there any other explanations for the symptoms?"
+        ],
+        "tips": [
+            "Assess signs and symptoms of delirium due to an acute physical condition, e.g. infection, celebral malaria, dehydration, metabolic abnormalities (such as hypoglycaemia or hyponatraemia); or medication side effects, e.g. due to some antimalarial medication or steroids."
+        ],
+        "pictures": [
+            null
+        ],
+        "videos": [
+            null
+        ],
+        "thisIsTrue": false,
+        "yesButton": true,
+        "noButton": true,
+        "willProceed": false,
+        "previousButton": true,
+        "next": null,
+        "nextTrue": "step3",
+        "nextFalse": "step4",
+        "previous": "step1"
+    },
+    "step3": {
+        "questions": [
+            null
+        ],
+        "tips": [
+            "Assess and manage the acute physical condition, and refer to emergency services/specialist as needed."
+        ],
+        "pictures": [
+            null
+        ],
+        "videos": [
+            null
+        ],
+        "thisIsTrue": false,
+        "yesButton": false,
+        "noButton": false,
+        "willProceed": false,
+        "previousButton": true,
+        "next": "submit",
+        "nextTrue": null,
+        "nextFalse": null,
+        "previous": "step2"
+    },
+    "step4": {
+        "questions": [
+            "Are DEMENTIA, DEPRESSION, DRUG/ALCOHOL INTOXICATION OR WITHDRAWAL suspected?"
+        ],
+        "tips": [
+            "If that is the case, please consult a Mental Health Specialist"
+        ],
+        "pictures": [
+            null
+        ],
+        "videos": [
+            null
+        ],
+        "thisIsTrue": false,
+        "yesButton": false,
+        "noButton": false,
+        "willProceed": true,
+        "previousButton": true,
+        "next": null,
+        "nextTrue": "step5",
+        "nextFalse": null,
+        "previous": "step2"
+    },
+    "step5": {
+        "questions": [
+            "Is the person having an acute manic episode?",
+            {
+                "Have several of the following symptoms occurred simultaneously,lasting for at least 1 week, and severely enough to interfere significantly with work and social activities or requiring confinement or hospitalization:Elevated or irritable mood": [
+                    "Decreased need for sleep",
+                    "Increased activity, feeling of increased energy, increased talkativeness or rapid speech",
+                    "Loss of normal social inhibitions such as sexual indiscretion",
+                    "Impulsive or reckless behaviours such as excessive spending, making imp",
+                    "Being easily distracted",
+                    "Unrealistically inflated self-esteem"
+                ]
+            }
+        ],
+        "html":"<div>Have several of the following symptoms occurred simultaneously, lasting for at least 1 week, and severely enough to interfere significantly with work and social activities or requiring confinement or hospitalization:<br><ul><li>Elevated or irritable mood</li><li>Decreased need for sleep</li><li>Increased activity, feeling of increased energy, increased talkativeness or rapid speech</li><li>Loss of normal social inhibitions such as sexual indiscretion</li><li>Impulsive or reckless behaviours such as excessive spending, making imp</li><li>Being easily distracted</li><li>Unrealistically inflated self-esteem</li></ul></div>",
+        "tips": [
+            null
+        ],
+        "pictures": [
+            null
+        ],
+        "videos": [
+            null
+        ],
+        "thisIsTrue": false,
+        "yesButton": true,
+        "noButton": true,
+        "willProceed": false,
+        "previousButton": true,
+        "next": null,
+        "nextTrue": "step6",
+        "nextFalse": "step7",
+        "previous": "step4"
+    },
+    "step6": {
+        "questions": [
+            "BIPOLAR DISORDER manic episode is likely"
+        ],
+        "tips": [
+            "Go to Protocol 1 (Manic episode in Bipolar disorder)"
+           
+        ],
+        "pictures": [
+            null
+        ],
+        "videos": [
+            null
+        ],
+        "thisIsTrue": null,
+        "yesButton": false,
+        "noButton": false,
+        "willProceed": false,
+        "previousButton": true,
+        "next": "submit",
+        "nextTrue": null,
+        "nextFalse": null,
+        "previous": "step5"
+    },
+    "step7": {
+        "questions": [
+            "Does the person have psychosis?",
+            {
+                "Does the person have at least two of the following:": [
+                    "Delusions, fixed false beliefs not shared by others in the person’s culture",
+                    "Hallucinations, hearing voices or seeing things that are not there",
+                    "Disorganized speech and/or behaviour, e.g. incoherent/irrelevant speech such as mumbling or laughing to self, strange appearance, signs of self-neglect or appearing unkempt"
+                ]
+            }
+        ],
+        "html":"<div>Does the person have at least two of the following:<br><ul><li>Delusions,fixed false beliefs not shared by others in the person’s culture</li><li>Hallucinations, hearing voices or seeing things that are not there</li><li>Disorganized speech and/or behaviour, e.g. incoherent/irrelevant speech such as mumbling or laughing to self, strange appearance, signs of self-neglect or appearing unkempt</li></ul></div><div>",
+        "tips": [
+            null
+        ],
+        "pictures": [
+            null
+        ],
+        "videos": [
+            null
+        ],
+        "thisIsTrue": false,
+        "yesButton": true,
+        "noButton": true,
+        "willProceed": false,
+        "previousButton": true,
+        "next": null,
+        "nextTrue": "step9",
+        "nextFalse": "step8",
+        "previous": "step5"
+    },
+    "step8": {
+        "questions": [
+            null
+        ],
+        "tips": [
+            "Consider consultation with specialist to review other possible causes of psychoses.",
+            "Go to Protocol 2 (Psychosis)"
+        ],
+        "pictures": [
+            null
+        ],
+        "videos": [
+            null
+        ],
+        "thisIsTrue": null,
+        "yesButton": false,
+        "noButton": false,
+        "willProceed": false,
+        "previousButton": true,
+        "next": "submit",
+        "nextTrue": null,
+        "nextFalse": null,
+        "previous": "step7"
+    },
+    "step9": {
+        "questions": [
+            null
+        ],
+        "tips": [
+            "PSYCHOSIS is likely",
+            "Go to Protocol 2 (Psychosis)"
+        ],
+        "pictures": [
+            null
+        ],
+        "videos": [
+            null
+        ],
+        "thisIsTrue": null,
+        "yesButton": false,
+        "noButton": false,
+        "willProceed": false,
+        "previousButton": true,
+        "next": "submit",
+        "nextTrue": null,
+        "nextFalse": null,
+        "previous": "step7"
+    }
+}
