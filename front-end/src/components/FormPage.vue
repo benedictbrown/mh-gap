@@ -1,7 +1,7 @@
 <template>
   <div id="FormPage">
     <b-form action="/submit" enctype="multipart/form-data">
-      <div id="registration" v-show="step === 1">
+      <div id="registration" v-show="step === 'step1'">
         <h1>Patient Registration</h1>
         <h2>Patient Name</h2>
         <div>
@@ -11,7 +11,7 @@
             name="fname"
             v-model="form.fname"
             label="First Name"
-            placeholder="Enter First Name"
+            placeholder="First Name"
           >
         </div>
         <br>
@@ -26,110 +26,50 @@
           >
         </div>
         <div style="float:right;">
-          <button class="navigate" @click.prevent="next(2)">Next</button>
+          <button class="navigate" @click.prevent="changeStep(json[step]['nextTrue'],json),fillHtml()">Next</button>
         </div>
       </div>
-      <div v-show="step !==1">
+      <div v-show="step !=='step1'">
         <h1 text-align:center>Patient Diagnosis</h1>
         <br>
       </div>
-      <div v-show="step === 2">
-        <h2>Are there any other explanations for the symptoms?</h2>
+      <div v-if="step !=='step1'">
+        <h2>{{json[step]['questions'][0]}}</h2>
+        <div v-if="fillHtml()">
+          <ul v-html = "html"></ul>
+        </div>
+        
         <div>
-          <p>
-            Assess signs and symptoms of delirium due to an acute physical condition, e.g. infection, celebral malaria, dehydration, metabolic abnormalities (such as hypoglycaemia or hyponatraemia); or medication side effects, e.g. due to some antimalarial medication
-            or steroids.
-          </p>
+          <p v-for="item in json[step]['tips']">{{item}}</p>
           <div>
-            <button @click.prevent="next(3)">Yes</button>
+            <div v-if="json[step]['next']=== 'submit'">
+              <p>click proceed to submit</p>
+              <button @click.prevent="submit()">Proceed</button>
+            </div>
+            <button
+              v-if="json[step]['willProceed']"
+              @click.prevent="changeStep(json[step]['nextTrue'],json)"
+            >Proceed</button>
+            <button
+              v-if="json[step]['yesButton']"
+              @click.prevent="recordAnswer('yes');changeStep(json[step]['nextTrue'],json)"
+            >Yes</button>
+
             <br>
             <br>
-            <button @click.prevent="next(4)">No</button>
+            <button
+              v-if="json[step]['noButton']"
+              @click.prevent="recordAnswer('no');changeStep(json[step]['nextFalse'],json)"
+            >No</button>
             <br>
           </div>
         </div>
         <br>
-        <button style="float:right;" @click.prevent="prev(1)">Previous</button>
-      </div>
-
-      <div v-show="step === 3">
-        <p>Assess and manage the acute physical condition, and refer to emergency services/specialist as needed.</p>
-        <button @click.prevent="prev(2)">Previous</button>
-        <br>
-        <button align="right" @click.prevent="submit()">Proceed</button>
-      </div>
-
-      <div v-show="step === 4">
-        <p>Is DEMENTIA, DEPRESSION, DRUG/ALCOHOL INTOXICATION OR WITHDRAWAL suspected?</p>
-        <p>If that is the case, please consult a Mental Health Specialist</p>
-        <button @click.prevent="prev(2)">Previous</button>
-        <button @click.prevent="next(5)">Proceed</button>
-      </div>
-
-      <div v-show="step === 5">
-        <h2>Is the person having an acute manic episode?</h2>
-        <div>Have several of the following symptoms occurred simultaneously, lasting for at least 1 week, and severely enough to interfere significantly with work and social activities or requiring confinement or hospitalization:
-          <br>
-          <ul>
-            <li>Elevated or irritable mood</li>
-            <li>Decreased need for sleep</li>
-            <li>Increased activity, feeling of increased energy, increased talkativeness or rapid speech</li>
-            <li>Loss of normal social inhibitions such as sexual indiscretion</li>
-            <li>Impulsive or reckless behaviours such as excessive spending, making imp</li>
-            <li>Being easily distracted</li>
-            <li>Unrealistically inflated self-esteem</li>
-          </ul>
-        </div>
-        <div>
-          <button @click.prevent="next(6)">Yes</button>
-          <br>
-          <button @click.prevent="next(7)">No</button>
-          <br>
-        </div>
-
-        <button @click.prevent="prev(4)">Previous</button>
-      </div>
-
-      <div v-show="step === 6">
-        <p>BIPOLAR DISORDER manic episode is likely</p>
-        <p>Go to Protocol 1 (Manic episode in Bipolar disorder</p>
-        <p>Click "Proceed" to submit this report</p>
-        <button @click.prevent="prev(5)">Previous</button>
-        <button @click.prevent="submit()">Proceed</button>
-      </div>
-
-      <div v-show="step === 7">
-        <h2>Does the person have psychosis?</h2>
-        <div>Does the person have at least two of the following:
-          <br>
-          <ul>
-            <li>Delusions, fixed false beliefs not shared by others in the person’s culture</li>
-            <li>Hallucinations, hearing voices or seeing things that are not there</li>
-            <li>Disorganized speech and/or behaviour, e.g. incoherent/irrelevant speech such as mumbling or laughing to self, strange appearance, signs of self-neglect or appearing unkempt</li>
-          </ul>
-        </div>
-        <div>
-          <button @click.prevent="next(9)">Yes</button>
-          <br>
-          <button @click.prevent="next(8)">No</button>
-          <br>
-        </div>
-
-        <button @click.prevent="prev(5)">Previous</button>
-      </div>
-
-      <div v-show="step === 8">
-        <p>Consider consultation with specialist to review other possible causes of psychoses.</p>
-        <p>Go to Protocol 2 (Psychosis)</p>
-        <button @click.prevent="prev(7)">Previous</button>
-        <button @click.prevent="submit()">Proceed</button>
-      </div>
-
-      <div v-show="step === 9">
-        <p>PSYCHOSIS is likely</p>
-        <p>Go to Protocol 2 (Psychosis)</p>
-        <button @click.prevent="prev(7)">Previous</button>
-        <button @click.prevent="submit()">Proceed</button>
+        <button
+          v-if="json[step]['previousButton']"
+          style="float:right;"
+          @click.prevent="previous()"
+        >Previous</button>
       </div>
     </b-form>
     <br>
