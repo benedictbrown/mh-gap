@@ -12,9 +12,9 @@
             v-model="form.fname"
             label="First Name"
             placeholder="First Name"
-          >
+          />
         </div>
-        <br>
+        <br />
         <div>
           <input
             id="lname"
@@ -23,28 +23,31 @@
             v-model="form.lname"
             label="Last Name"
             placeholder="Last Name"
-          >
+          />
         </div>
         <div style="float:right;">
-          <button class="navigate" @click.prevent="changeStep(json[step]['nextTrue'],json),fillHtml()">Next</button>
+          <button
+            class="navigate"
+            @click.prevent="save('yes'),changeStep(json[step]['nextTrue'],json)"
+          >Next</button>
         </div>
       </div>
-      <div v-show="step !=='step1'">
+      <div v-if="(step !=='step1'&& step !=='step10')">
         <h1 text-align:center>Patient Diagnosis</h1>
-        <br>
-      </div>
-      <div v-if="step !=='step1'">
+        <br />
+        <button v-if="(step !=='step2')" style="float:right;" @click.prevent="summary()">Summary</button>
+        <br />
+        <br />
         <h2>{{json[step]['questions'][0]}}</h2>
         <div v-if="fillHtml()">
-          <ul v-html = "html"></ul>
+          <ul v-html="html"></ul>
         </div>
-        
         <div>
           <p v-for="item in json[step]['tips']">{{item}}</p>
           <div>
             <div v-if="json[step]['next']=== 'submit'">
               <p>click proceed to submit</p>
-              <button @click.prevent="submit()">Proceed</button>
+              <button @click.prevent="changeStep('step10',json)">Proceed</button>
             </div>
             <button
               v-if="json[step]['willProceed']"
@@ -52,19 +55,19 @@
             >Proceed</button>
             <button
               v-if="json[step]['yesButton']"
-              @click.prevent="recordAnswer('yes');changeStep(json[step]['nextTrue'],json)"
+              @click.prevent="recordAnswer(' yes');changeStep(json[step]['nextTrue'],json), save(' yes')"
             >Yes</button>
 
-            <br>
-            <br>
+            <br />
+            <br />
             <button
               v-if="json[step]['noButton']"
-              @click.prevent="recordAnswer('no');changeStep(json[step]['nextFalse'],json)"
+              @click.prevent="recordAnswer(' no');changeStep(json[step]['nextFalse'],json),save(' no')"
             >No</button>
-            <br>
+            <br />
           </div>
         </div>
-        <br>
+        <br />
         <button
           v-if="json[step]['previousButton']"
           style="float:right;"
@@ -72,11 +75,46 @@
         >Previous</button>
       </div>
     </b-form>
-    <br>
+    <br />
+    <div id="summary" v-show="step === 'step10'">
+      <h1 text-align:center>Patient Summary</h1>
+      <h2>{{patientName}}</h2>
+      <div>
+        <ul>
+          <li>Patient Name:{{patientSummary.name}}</li>
+          <li>Date: {{ patientSummary.date }}</li>
+          <li>Examiner Name: {{ patientSummary.examiner }}</li>
+          <li>Results:</li>
+          <ul>
+            <li>{{ sumString }}</li>
+          </ul>
+        </ul>
+      </div>
+      <button
+        style="float:right;"
+        @click.prevent="previous()"
+      >Previous</button>
+      <br />
+      <br />
+      <div>
+        <p>Please click to email patient results.</p>
+        <button style="float:left;" @click.prevent="email()">Send Results</button>
+      </div>
+      <br />
+      <br />
+      <br />
+      <div>
+        <p>When you are done reviewing the patient summary and emailing, please click to submit.</p>
+        <button style="float:left;" @click.prevent="submit()">Submit</button>
+      </div>
+      <br />
+      <div></div>
+    </div>
   </div>
 </template>
 
 <script src="./Form.js">
+/* eslint-disable no-console */
 </script>
 
 <style>
