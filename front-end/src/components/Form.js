@@ -1,4 +1,8 @@
-
+// import PDFDocument from "pdfkit";
+//should i make an alert at the end, a button to show the results at all times, or just a page to show at the end?
+//check if email is available?
+// how to format email without html 
+//and more desriptive name for stepson json for this page?
 const api = "http://localhost:3001";
 let FormData = require('form-data');
 
