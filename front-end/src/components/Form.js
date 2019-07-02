@@ -1,4 +1,4 @@
-// import PDFDocument from "pdfkit";
+
 const api = "http://localhost:3001";
 let FormData = require('form-data');
 
@@ -11,7 +11,17 @@ export default {
       step: "step1",
       path: ['step1'],
       html: '',
+      body: '',
+      sumString: "",
       responses: {},
+      records: {},
+      patientSummary: {
+      },
+      patientName: '',
+      name: '',
+      date: '',
+      examiner: '',
+      results: '',
       form: {
         fname: "",
         lname: "",
@@ -37,25 +47,60 @@ export default {
     };
   },
   mounted() {
-    console.log("A1");
-    console.log(this);
+    //console.log("A1");
+    // console.log(this);
     let that = this;
     fetch('./mhgsteps.json')
       .then(res => res.json())
-      .then(res => { console.log(JSON.stringify(res)); return res; })
+      .then(res => { return res; })
       .then(res => {
-        console.log("A2");
-        console.log(res);
-        console.log(that);
+        //console.log("A2");
+        //console.log(res);
+        //console.log(that);
         that.json = res;
       });
+
   },
   methods: {
+    save(response) {
+      this.patientName = `${this.form.fname} ${this.form.lname}`
+      console.log(this.patientName);
+      if (this.step === 'step1') {
+        this.patientSummary["name"] = this.patientName;
+        console.log(this.patientSummary);
+      }
+      else { this.patientSummary["results"] = this.responses };
+      let currentDate = new Date();
+      this.patientSummary["date"] = currentDate;
+      this.patientSummary["examiner"] = 'test examiner'
+      if (this.patientSummary.results) {
+        this.sumString = JSON.stringify(this.patientSummary.results).replace(/[{}]/g, '').replace(/[""]/g, '');
+        //this.records.[this.patientName] = this.patientSummary
+      }
+      console.log(this.patientSummary);
+      //console.log(this.records);
+    },
+    email() {
+      this.sumString = JSON.stringify(this.patientSummary.results).replace(/[{}]/g, '').replace(/[""]/g, '');
+      this.body = `Name:\n ${this.patientSummary["name"]} 
+      \nDate:\n ${this.patientSummary["date"]} 
+      \nExaminer:\n ${this.patientSummary["examiner"]} 
+      \nResults:\n${this.sumString}`
+      cordova.plugins.email.open({
+        to: 'psychiatrist@gmail.com',
+        //cc: 'erika@mustermann.de',
+        //bcc: ['john@doe.com', 'jane@doe.com'],
+        subject: 'Results for patient', // do we put patient name or eventually patient number
+        body: this.body,
+      });
+    },
     recordAnswer(answer) {
       this.responses[this.step] = answer;
       console.log(this.responses);
     },
     changeStep(newStep, json) {
+
+      console.log(this.step);
       console.log(json[this.step]['nextTrue'])
       this.path.push(newStep)
       console.log(this.path);
@@ -111,6 +156,22 @@ export default {
       else {
         changeStep(json[this.step]['nextTrue'], json)
       }
+    },
+    summary() {
+      this.sumString = JSON.stringify(this.patientSummary.results).replace(/[{}]/g, '').replace(/[""]/g, '');
+      this.body = `Name:\n ${this.patientSummary["name"]} 
+      \nDate:\n ${this.patientSummary["date"]} 
+      \nExaminer:\n ${this.patientSummary["examiner"]} 
+      \nResults:\n${this.sumString}`
+      navigator.notification.alert(
+        this.body, // message
+        () => {
+          console.log("dismissed");
+        }, // callback
+        "Patient Summary", // title
+        "Done" // buttonName
+      );
     }
   }
 }
+
