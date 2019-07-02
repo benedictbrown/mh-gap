@@ -209,5 +209,24 @@
         "nextTrue": null,
         "nextFalse": null,
         "previous": "step7"
+    },
+    "step10": {
+        "questions": [
+            null
+        ],
+        "tips": [
+            null
+        ],
+        "pictures": [
+            null
+        ],
+        "videos": [
+            null
+        ],
+       
+        "willProceed": false,
+        "previousButton": true,
+        "previous": null
     }
+
 }
